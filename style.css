@@ -30,3 +30,9 @@ table{
 .user-table{
   border:1px solid black;
 }
+/* #selectAll:checked{
+  background-color: grey;
+} */
+tr.selected {
+  background-color: #f0f0f0; /* Grey background color for selected rows */
+}
