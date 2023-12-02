@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body onload="basic()">
+  <h1>User Admin Panel</h1>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search...">
+    <button class="search" onclick="basic()">Search</button>
+        <button class="delete" onclick="deleteSelected()">Delete Selected</button>
+  </div>
+
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"></th>
+        <th class="t1" >Name</th>
+        <th class="t1" >Email</th>
+        <th class="t1" >Role</th>
+        <th class="t1" >Actions</th>
+      </tr>
+    </thead>
+    <tbody id="apidata">
+      <!--API DATA   -->
+    </tbody>
+  </table>
+    <!-- <div class="pagination">
+        <button class="first-page" onclick="goToPage('first')">First</button>
+        <button class="previous-page" onclick="goToPage('prev')">Previous</button>
+        <span id="currentPage">Page 1</span>
+        <button class="next-page" onclick="goToPage('next')">Next</button>
+        <button class="last-page" onclick="goToPage('last')">Last</button>
+    </div> -->
+</body>
+</html>
