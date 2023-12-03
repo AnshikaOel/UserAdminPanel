@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Admin Panel</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="script.js"></script>
 </head>
 <body onload="basic()">
   <h1>User Admin Panel</h1>
   <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search...">
-    <button class="search" onclick="searchdata()">Search</button>
-    <button class="delete" onclick="deleteSelected()">Delete Selected</button>
+    <input type="text" id="searchInput" placeholder="Search Records...">
+    <button class="search-button button-click" onclick="searchdata()">Search</button>
+    <button class="delete-button button-click" onclick="deleteSelected()">Delete Selected</button>
   </div>
 
   <table class="user-table">
@@ -30,12 +31,46 @@
       <!--API DATA   -->
     </tbody>
   </table>
-    <!-- <div class="pagination">
-        <button class="first-page" onclick="goToPage('first')">First</button>
-        <button class="previous-page" onclick="goToPage('prev')">Previous</button>
+  <div class="editor">
+      <table border="1">
+          <tr>
+              <th>
+                  Name
+              </th>
+              <td>
+                  <input type="text" name="user-admin-name"/>
+              </td>
+          </tr>
+          <tr>
+              <th>
+                  Email
+              </th>
+
+              <td>
+                  <input type="text" name="user-admin-email"/>
+              </td>
+          </tr>
+          <tr>
+              <th>
+                  Role
+              </th>
+              <td>
+                  <input type="text" name="user-admin-role"/>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <input type="submit" onclick="updateRecord()" value="Update Record"/>
+              </td>
+          </tr>
+      </table>
+  </div>
+   <div class="pagination">
+        <button class="first-page button-click" onclick="goToPage(1)">First</button>
+        <button class="previous-page button-click" onclick="goToPrevPage()">Previous</button>
         <span id="currentPage">Page 1</span>
-        <button class="next-page" onclick="goToPage('next')">Next</button>
-        <button class="last-page" onclick="goToPage('last')">Last</button>
-    </div> -->
+        <button class="next-page button-click" onclick="goToNextPage()">Next</button>
+        <button class="last-page button-click" onclick="goToLastPage()">Last</button>
+    </div>
 </body>
 </html>
