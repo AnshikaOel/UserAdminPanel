@@ -5,7 +5,7 @@ async function basic()
   var a=await fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json")
   if(a)
   {
-    data=await a.json()
+    data=await a.json() 
     size=data.length
     var tab=""
     for( i=0;i<size;i++)
@@ -54,7 +54,7 @@ function searchdata()
   else
       document.querySelector("#apidata").innerHTML="Data Not Found"
 
-    attachListener();
+    // attachListener();
     loadPagination(count);
 }
 
@@ -90,7 +90,7 @@ function toggleSelectAll() {
   });
 }
 
-
+//  grey background for selected row
 function toggleRowStyle(checkbox) {
   var row = checkbox.closest('tr');
   if (checkbox.checked) {
@@ -128,7 +128,7 @@ function attachListener() {
         });
     });
 
-    document.querySelectorAll('.user-admin-row-edit').forEach(function (edit) {
+document.querySelectorAll('.user-admin-row-edit').forEach(function (edit) {
         edit.addEventListener('click', function (e) {
             var identifier = e.currentTarget.dataset.recordIdentifier;
             showRowEditor();
@@ -151,6 +151,7 @@ var maxPages = 1;
 function loadPagination(size) {
     console.log(size);
     maxPages = Math.ceil(size/10);
+    console.log("max pages="+maxPages)
     goToPage(1);
 }
 
@@ -174,14 +175,14 @@ function goToPage(pageNo) {
     hideAllPages();
     currentPage = pageNo;
     document.querySelectorAll('.user-admin-row-group-' + currentPage).forEach(function (e){
-        e.classList.add('pagination-show-row');
+        // e.classList.add('pagination-show-row');
         e.classList.remove('pagination-hide-row');
     });
-    document.querySelector('#currentPage').innerHTML = 'Page ' + currentPage + '/' + maxPages;
+    document.querySelector('#currentPage').innerHTML = 'Page : ' + currentPage + '/' + maxPages;
 }
 
 function hideAllPages() {
     document.querySelectorAll('.user-admin-row').forEach(function (e){
-        e.classList.add('pagination-hide-row');
+         e.classList.add('pagination-hide-row');
     });
 }
