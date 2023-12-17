@@ -1,6 +1,7 @@
 // CALLING API
 var size,data
-async function basic()
+flag =true// for only 1 update at a time
+async function basic() 
 {
   var a=await fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json")
   if(a)
@@ -11,20 +12,28 @@ async function basic()
     for( i=0;i<size;i++)
     {
       tab+=
-        `<tr class="user-admin-row user-admin-row-group-${Math.ceil((i+1)/10)}" id="user-admin-row-${i}">
+        `<table border="1" >
+        <tr class="user-admin-row user-admin-row-group-${Math.ceil((i+1)/10)}" id="user-admin-row-${i}">
           <td><input type="checkbox" id="checkbox-${i}" class="row-checkbox"></td>
           <td>${data[i].name}</td>
           <td>${data[i].email}</td>
           <td>${data[i].role}</td>
           <td><i class="fa fa-edit user-admin-row-edit" data-record-identifier="${i}"></i></td>
-        </tr>`
+        </tr>
+        <tr class="editor editor-hide user-admin-row-group-${Math.ceil((i+1)/10)}"id ="user-adminEdit-row-${i}">
+            <td><input type="text" name="user-admin-name" value="${data[i].name}"/></td>
+            <td><input type="email" name="user-admin-email" value="${data[i].email}"/></td>
+            <td><input type="text" name="user-admin-role" value="${data[i].role}"/></td>
+            <td><input type="submit" onclick="updateRecord()" value="Update Record"/></td>
+        </tr>
+      </table>`
     }
     document.querySelector("#apidata").innerHTML=tab
-      hideRowEditor();
-      attachListener();
+
+      attachListener(currentEditedRow);
       loadPagination(size);
   }else{
-    console.log("err")
+    console.log("Some Error occured")
   }
 }
 
@@ -100,23 +109,26 @@ function toggleRowStyle(checkbox) {
   }
 }
 
+// FOR UPDATING RECORD
 var currentEditedRow = -1;
 function updateRecord() {
-    if(currentEditedRow === -1) {
+    if(currentEditedRow === -1) {  
+        alert("this is bull shit")
         return;
     }
 
-    var name = document.querySelector('input[name="user-admin-name"]').value;
-    var email = document.querySelector('input[name="user-admin-email"]').value;
-    var role = document.querySelector('input[name="user-admin-role"]').value;
+    var name=document.getElementsByName('user-admin-name')[0].value
+    var email=document.getElementsByName('user-admin-email')[0].value
+    var role=document.getElementsByName('user-admin-role')[0].value
+    console.log(name+email+role)
 
     var editedRow = document.querySelector('#user-admin-row-' + currentEditedRow);
 
     editedRow.children.item(1).innerHTML=name;
     editedRow.children.item(2).innerHTML=email;
     editedRow.children.item(3).innerHTML=role;
-
-    hideRowEditor();
+    flag=true
+    hideRowEditor(currentEditedRow);
 }
 
 // Attach event listeners to individual checkboxes
@@ -130,19 +142,32 @@ function attachListener() {
 
 document.querySelectorAll('.user-admin-row-edit').forEach(function (edit) {
         edit.addEventListener('click', function (e) {
-            var identifier = e.currentTarget.dataset.recordIdentifier;
-            showRowEditor();
-            currentEditedRow = identifier;
+            if(flag===true)
+            {
+                flag=false
+                var identifier = e.currentTarget.dataset.recordIdentifier;
+                showRowEditor(identifier);
+                console.log(identifier)
+                currentEditedRow = identifier;
+            }else{
+            alert("Please Edit one row at a time")
+            }
         });
     });
 }
 
-function showRowEditor() {
-    document.querySelector('.editor').classList.remove('editor-hide');
+// to show the edit part
+function showRowEditor(x) {
+    console.log("this "+Math.ceil((x+1)/10))
+    
+    document.querySelector(`#user-admin-row-${x}`).classList.add('editor-hide');
+    document.querySelector(`#user-adminEdit-row-${x}`).classList.remove('editor-hide');
 }
 
-function hideRowEditor() {
-    document.querySelector('.editor').classList.add('editor-hide');
+// to hide the edit part
+function hideRowEditor(x) {
+    var p=document.querySelector(`#user-adminEdit-row-${x}`).classList.add('editor-hide')
+    document.querySelector(`#user-admin-row-${x}`).classList.remove('editor-hide');
 }
 
 //Pagination
@@ -175,7 +200,6 @@ function goToPage(pageNo) {
     hideAllPages();
     currentPage = pageNo;
     document.querySelectorAll('.user-admin-row-group-' + currentPage).forEach(function (e){
-        // e.classList.add('pagination-show-row');
         e.classList.remove('pagination-hide-row');
     });
     document.querySelector('#currentPage').innerHTML = 'Page : ' + currentPage + '/' + maxPages;

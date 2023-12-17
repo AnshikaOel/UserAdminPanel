@@ -2,10 +2,12 @@ h1, div{
   display: flex;
   align-items: center;
   justify-content: center;
-}
+}  
+
 table{
   width: 100%; 
 }
+
 #searchInput{
   padding: 7px;
   margin: 20px;
@@ -13,6 +15,7 @@ table{
   border-radius: 3px;
   border: 3px solid black;
 }
+
 .search-button,.delete-button{
   padding: 7px;
   margin: 20px;
@@ -34,8 +37,12 @@ table{
   padding: 5px;
   border:0.5px solid grey;
   border-radius: 2px;
-
 }
+
+.user-admin-row td{
+  padding: 7px;
+}
+
 .user-table{
   border:1px solid black;
 }
@@ -45,35 +52,35 @@ tr.selected {
 }
 
 .button-click {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .user-admin-row.selected {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
 .pagination {
-    margin-top: 2%;
+  margin-top: 2%;
 }
 
 .last-page,.next-page,.previous-page,.first-page {
   background-color: white;
-    margin-left: 1%;
-    margin-right: 1%;
-    padding-top:5px;
-    padding-bottom: 5px;
-    font-size:20px;
-    border: 2px solid black;
-    border-radius: 5px;
+  margin-left: 1%;
+  margin-right: 1%;
+  padding-top:5px;
+  padding-bottom: 5px;
+  font-size:20px;
+  border: 2px solid black;
+  border-radius: 5px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .pagination-show-row {
-    display: table-row;
+  display: table-row;
 }
 
 .pagination-hide-row {
-    display: none;
+  display: none;
 }
 
 .user-admin-row-edit {
@@ -82,13 +89,20 @@ tr.selected {
   margin-left:45%;
 }
 
+.editor{
+  padding: 25px 25px;
+  margin: 8px 0;
+  box-sizing: border-box;
+} 
+
 .editor-hide {
-    display: none;
+  display: none;
 }
 
-.editor-show {
-    display: table-row;
+.edit-row {
+  display: none;
 }
+
 #currentPage{
   border: 2px solid grey;
   font-size: 20px;
